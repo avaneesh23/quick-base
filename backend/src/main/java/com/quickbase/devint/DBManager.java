@@ -7,4 +7,6 @@ import java.sql.Connection;
  */
 public interface DBManager {
     public Connection getConnection();
+    
+    public Integer getPopulationBy(String country);
 }

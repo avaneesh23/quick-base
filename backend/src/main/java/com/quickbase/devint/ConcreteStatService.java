@@ -8,12 +8,23 @@ import org.apache.commons.lang3.tuple.Pair;
 
 public class ConcreteStatService implements IStatService {
 
+	private final List<Pair<String, Integer>> output = new ArrayList<Pair<String, Integer>>();
+	
+	
+	
+	public Integer getPopulationBy(String country) {
+		return 25;
+		
+	}
+	
+	
+	
 	@Override
 	/**
 	 * Returns an unordered list of countries and their populations
 	 */
 	public List<Pair<String, Integer>> GetCountryPopulations() {
-		List<Pair<String, Integer>> output = new ArrayList<Pair<String, Integer>>();
+		
 		
 		// Pretend this calls a REST API somewhere
 		output.add(new ImmutablePair<String, Integer>("India",1182105000));
