@@ -1,6 +1,7 @@
 package com.quickbase.devint;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import org.apache.commons.lang3.tuple.ImmutablePair;
@@ -8,13 +9,26 @@ import org.apache.commons.lang3.tuple.Pair;
 
 public class ConcreteStatService implements IStatService {
 
-	private final List<Pair<String, Integer>> output = new ArrayList<Pair<String, Integer>>();
+	private List<Pair<String, Integer>> output = new ArrayList<Pair<String, Integer>>();
 	
 	
 	
 	public Integer getPopulationBy(String country) {
-		return 25;
 		
+		int population = 0;
+		if (null == output) {
+			output = this.GetCountryPopulations();
+		}
+		Iterator<Pair<String, Integer>> it = output.iterator();
+		while (it.hasNext()) {
+			Pair<String, Integer> entry = it.next();
+			System.out.println(entry.getKey());
+			if (entry != null && entry.getKey().equalsIgnoreCase(country)) {
+				population = entry.getValue();
+				break;
+			}
+		}
+		return population;
 	}
 	
 	
@@ -24,8 +38,7 @@ public class ConcreteStatService implements IStatService {
 	 * Returns an unordered list of countries and their populations
 	 */
 	public List<Pair<String, Integer>> GetCountryPopulations() {
-		
-		
+			
 		// Pretend this calls a REST API somewhere
 		output.add(new ImmutablePair<String, Integer>("India",1182105000));
 		output.add(new ImmutablePair<String, Integer>("United Kingdom",62026962));

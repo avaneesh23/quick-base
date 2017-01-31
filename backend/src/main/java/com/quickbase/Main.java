@@ -1,9 +1,13 @@
 package com.quickbase;
 
-import com.quickbase.devint.ConcreteStatService;
-import com.quickbase.devint.DBManager;
-import com.quickbase.devint.DBManagerImpl;
-import com.quickbase.devint.IStatService;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Scanner;
+
+import org.apache.commons.lang3.tuple.Pair;
+
+import com.quickbase.devint.DataAccessImpl;
+import com.quickbase.devint.IDataAccess;
 
 /**
  * The main method of the executable JAR generated from this repository. This is to let you
@@ -12,24 +16,22 @@ import com.quickbase.devint.IStatService;
  */
 public class Main {
 	
-	public enum Country { USA, Canada, United_Kingdom, Guernsey, India, South_Korea, 
-		PERU, NEW_ZEALAND, MOLDOVA, EGYPT, BAHRAIN, NORTH_KOREA, LAOS, UKRAINE, 
-		CHILE, MALI, GREECE, ARMENIA, SLOVENIA, ST_VINCENT__GRANADINES, BHUTAN, 
-		ARUBA, MALDIVES, MAYOTTE, VIETNAM, GERMANY, BOSTWANA, TOGO, LUXEMBOURG, 
-		US_VIRGIN_ISLANDS, BELARUS, MYANMAR, MAURITANIA, MALAYSIA, DOMINICAN_REPUBLIC, 
-		NEW_CALEDONIA_FRANCE, Slovakia, KYRGYZSTAN, LITUANIA };	
-	
     public static void main( String args[] ) {
     	
-        DBManager dao = new DBManagerImpl();
-        IStatService service = new ConcreteStatService();
-        
-        String countryName = Country.Slovakia.toString();
-        // returns 0 if the country is not found in the DB
-        int dbPops = dao.getPopulationBy(countryName);
-        int population = (dbPops == 0) ? service.getPopulationBy(countryName) : dbPops;
-        
-        System.out.println("Population of " + countryName +" : "+population);
+    	IDataAccess data = new DataAccessImpl();
+    	
+    	//Scanner scan = new Scanner(System.in);
+    	//String countryName = scan.next();
+    	//scan.close();
+    	//System.out.println(data.getPopulationBy(countryName));
+    	
+		Iterator<Pair<String, Integer>> it = data.GetCountryPopulations().iterator();
+		while (it.hasNext()) {
+			Pair<String, Integer> entry = it.next();
+				System.out.println(entry.getKey() +"\t" +entry.getValue());
+			}
     }
-
 }
+
+
+

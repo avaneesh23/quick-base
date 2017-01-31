@@ -5,8 +5,8 @@ import java.sql.Connection;
 /**
  * Created by ckeswani on 9/16/15.
  */
-public interface DBManager {
+public interface DBManager extends IDataAccess {
+	
     public Connection getConnection();
     
-    public Integer getPopulationBy(String country);
 }

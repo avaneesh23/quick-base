@@ -3,12 +3,8 @@ package com.quickbase.devint;
 import java.util.List;
 import org.apache.commons.lang3.tuple.Pair;
 
-public interface IStatService {
-	
-	
+public interface IStatService extends IDataAccess {
 	
 	List<Pair<String, Integer>> GetCountryPopulations();
-	
-	Integer getPopulationBy(String country);
 
 }
